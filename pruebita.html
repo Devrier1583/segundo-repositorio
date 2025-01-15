@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--<div class="miclase">Div unico</div>
+    <div class="miclase">Div ignorado</div>
+    <script>
+        const elemento = document.querySelector('.miclase');
+        console.log(elemento.textContent);
+    </script>-->
+
+    <div id="notificaciones"></div><br>
+    <button id="producto">Añadir</button>
+<script>
+
+const añadir1 = document.getElementById('producto');
+
+añadir1.addEventListener('click', ()=>{
+    
+    const notificacion = document.createElement('div'); // Crear un <div>
+    notificacion.textContent = '¡Producto añadido al carrito!'; // Texto del mensaje
+    notificacion.style.backgroundColor = 'green'; // Estilo visual
+    notificacion.style.color = 'white';
+    notificacion.style.padding = '50px';
+    document.getElementById('notificaciones').appendChild(notificacion); // Agregarlo al contenedor
+  })
+  
+</script>
+
+</body>
+</html>

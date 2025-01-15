@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .highlight {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="main-title">Manipulacion dinamica del DOM</h1>
+
+  <p id="description">Demostracion de manipulacion dimanica del DOM con JavaScript.</p>
+
+  <ul id="item-list">
+    <li class="item">Item 1</li>
+    <li class="item">Item 2</li>
+    <li class="item">Item 3</li>
+  </ul>
+ 
+  <img id="image" src="allstaroja.jpg" alt="Placeholder Image">
+
+  <div id="actions">
+    <button id="add-item">Agrear item</button>
+    <button id="remove-item">Remoner</button>
+    <button id="change-title">Cambiar titulo</button>
+    <button id="toggle-highlight">Color titulo</button>
+  </div>
+<br>
+  <form id="form-example">
+    <label for="new-item">Nuevo item:</label>
+    <input type="text" id="new-item" name="new-item" placeholder="Enter item text" required>
+    <button type="submit" id="submit-item">Agregar item a la lista</button>
+  </form>
+
+  <script>
+    // Selection Methods
+    const title = document.getElementById('main-title');
+    const description = document.querySelector('#description');
+    const itemList = document.getElementById('item-list');
+    const items = document.getElementsByClassName('item');
+    const image = document.querySelector('img');
+    const buttons = document.getElementsByTagName('button');
+     let con =1;
+
+    // Buttons
+    const addItemButton = document.querySelector('#add-item');
+    const removeItemButton = document.querySelector('#remove-item');
+    const changeTitleButton = document.querySelector('#change-title');
+    const toggleHighlightButton = document.querySelector('#toggle-highlight');
+
+    // Form
+    const form = document.getElementById('form-example');
+    const newItemInput = document.getElementById('new-item');
+
+    // Manipulation Methods
+    addItemButton.addEventListener('click', () => {
+      const newItem = document.createElement('li');
+      newItem.className = 'item';
+      newItem.innerText = `Item ${items.length + 1}`;
+      itemList.appendChild(newItem);
+    });
+
+    removeItemButton.addEventListener('click', () => {
+      if (items.length > 0) {
+        const lastItem = items[items.length - 1];
+        itemList.removeChild(lastItem);
+      }
+    });
+
+    changeTitleButton.addEventListener('click', () => {
+      if(con==1){
+       title.innerText = 'DOM MODIFICADO POR BOTON';
+       title.style.color = "green"; 
+       title.style.transition = "all 2s ease";
+       title.style.transformOrigin = "top left";
+       title.style.transform = "rotate(3deg)";
+       
+        con = 2;
+      }else if(con ==2){
+        title.innerText = 'Manipulacion dinamica del DOM';
+        title.style.color = "black"; 
+        title.style.transform = "rotate(0deg)";
+        con =1;
+      }
+      
+
+
+      /*title.style.color = "yellow";
+      description.innerHTML = 'Presione "i" para cambiar la imagen y "d" para restablecerla'
+      description.style.color = "blue";
+      description.style.fontSize = "20px";
+      description.style.transition ="all 2s ease";*/
+    });
+
+    toggleHighlightButton.addEventListener('click', () => {
+      title.classList.toggle('highlight');
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent form submission
+      const newItemText = newItemInput.value.trim();
+      if (newItemText) {
+        const newItem = document.createElement('li');
+        newItem.className = 'item';
+        newItem.innerText = newItemText;
+        itemList.appendChild(newItem);
+        newItemInput.value = ''; // Clear input field
+      }
+    });
+
+    // Event Handling - Keydown
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'i') {
+        image.setAttribute('src', 'allstarnegra.jpg');
+      } else if (event.key === 'd') {
+        image.setAttribute('src', 'allstaroja.jpg');
+      }
+    });
+
+    // Modify description dynamically
+    //description.innerHTML = '<strong>Press "i" to change the image or "d" to reset it.</strong>';
+  </script>
+</body>
+</html>
